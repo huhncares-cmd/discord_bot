@@ -35,10 +35,15 @@ async def corona(ctx, country="Germany"):
         embed=discord.Embed(title="Fehler", description="Dieses Land wurde nicht in der Datenbank gefunden.", timestamp=ctx.message.created_at, color=0xee2f45)
         await ctx.send(embed=embed)
         return
+<<<<<<< HEAD
     embed=discord.Embed(title=f"Aktuelle COVID-19 Statistiken ({country})", url="https://www.worldometers.info/coronavirus/#countries", timestamp=ctx.message.created_at, color=0x65c465)
     embed.add_field(name=f"Neuste Werte:", value=f"```{table}```", inline=False)
 
     await ctx.send(embed=embed)
+=======
+    await ctx.send(f"Aktuelle COVID-19 Statistiken ({country}): ```{table}```")
+    print(f"&corona: Corona-Stats:\n{table}\nsent to {ctx.message.author}!")
+>>>>>>> c65d98d30104f7cd052b10ebc591ea418564c91d
 
 @client.command()
 async def crypto(ctx):
