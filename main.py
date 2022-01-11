@@ -34,7 +34,7 @@ async def corona(ctx, country="Germany"):
         await ctx.send("Dieses Land wurde nicht in der Datenbank gefunden.")
         print(f"&corona: Corona-Stats: Unvalid request by {ctx.message.author}!")
         return
-    await ctx.send(f"Aktuelle COVID-19 Statistiken: ```{table}```")
+    await ctx.send(f"Aktuelle COVID-19 Statistiken ({country}): ```{table}```")
     print(f"&corona: Corona-Stats:\n{table}\nsent to {ctx.message.author}!")
 
 @client.command()
