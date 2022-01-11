@@ -1,3 +1,4 @@
+
 try:
     import discord
     from discord.ext import commands
@@ -31,19 +32,30 @@ async def corona(ctx, country="Germany"):
         for i, j in enumerate(key_names):
             table.add_row([j, covid_data[country][i]])
     except KeyError:
-        await ctx.send("Dieses Land wurde nicht in der Datenbank gefunden.")
-        print(f"&corona: Corona-Stats: Unvalid request by {ctx.message.author}!")
+        embed=discord.Embed(title="Fehler", description="Dieses Land wurde nicht in der Datenbank gefunden.", timestamp=ctx.message.created_at, color=0xee2f45)
+        await ctx.send(embed=embed)
         return
-    await ctx.send(f"Aktuelle COVID-19 Statistiken: ```{table}```")
-    print(f"&corona: Corona-Stats:\n{table}\nsent to {ctx.message.author}!")
+    embed=discord.Embed(title=f"Aktuelle COVID-19 Statistiken ({country})", url="https://www.worldometers.info/coronavirus/#countries", timestamp=ctx.message.created_at, color=0x65c465)
+    embed.add_field(name=f"Neuste Werte:", value=f"```{table}```", inline=False)
+
+    await ctx.send(embed=embed)
 
 @client.command()
 async def crypto(ctx):
     pass
 
 @client.command()
-async def meme(ctx):
-    pass
+async def meme(ctx, subreddit="memes"):
+    try:
+        meme = await get_meme.generate_meme(subreddit)
+    except Exception:
+        embed=discord.Embed(title="Fehler", description="Dieser Subreddit existiert nicht.", timestamp=ctx.message.created_at, color=0xee2f45)
+        await ctx.send(embed=embed)
+        return
+    embed=discord.Embed(title=meme[0], url=meme[2], timestamp=ctx.message.created_at, color=0xee752f)
+    embed.set_image(url=meme[1])
+
+    await ctx.send(embed=embed)
 
 if __name__ == '__main__':
     client.run(TOKEN)
