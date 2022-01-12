@@ -48,6 +48,7 @@ async def corona(ctx, country="Germany"):
         return
     embed=discord.Embed(title=f"Aktuelle COVID-19 Statistiken ({country})", url="https://www.worldometers.info/coronavirus/#countries", timestamp=ctx.message.created_at, color=0x65c465)
     embed.add_field(name=f"Neuste Werte:", value=f"```{table}```", inline=False)
+    embed.set_footer(text="Coded with <3 by huhncares")
 
     await ctx.send(embed=embed)
 
@@ -65,6 +66,7 @@ async def reddit(ctx, subreddit="memes"):
         return
     embed=discord.Embed(title=post[0], url=post[2], timestamp=ctx.message.created_at, color=0xee752f)
     embed.set_author(name=f"r/{subreddit}")
+    embed.set_footer(text="Coded with <3 by huhncares")
     embed.set_image(url=post[1])
 
     await ctx.send(embed=embed)
