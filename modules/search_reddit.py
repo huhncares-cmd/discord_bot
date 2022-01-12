@@ -16,7 +16,7 @@ async def get_random_reddit_image(subreddit='memes'):
     subreddit = await reddit.subreddit(subreddit)
     
     posts = []
-    post_selection = subreddit.top(limit=50)
+    post_selection = subreddit.hot(limit=50)
 
     async for post in post_selection:
         posts.append([post.title, post.url, f"https://www.reddit.com{post.permalink}"])
